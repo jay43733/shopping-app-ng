@@ -1,10 +1,8 @@
 <div class="row">
   <div class="col-md-5">
-    <app-recipe-list (selected)="(selectedRecipeItem)"></app-recipe-list>
+    <app-recipe-list></app-recipe-list>
   </div>
   <div class="col-md-7">
-    <app-recipe-detail
-      (selectedRecipeDetail)="(selectedRecipeItem)"
-    ></app-recipe-detail>
+    <router-outlet></router-outlet>
   </div>
 </div>

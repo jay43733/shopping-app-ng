@@ -10,6 +10,15 @@ import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
+import {
+  RouterLink,
+  RouterLinkActive,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
+import { BetterHighlightDirective } from './better-highlight.directive';
+import { DropdownDirective } from './dropdown.directive';
+import { AppRouteModule } from './app.route.module';
 
 @NgModule({
   declarations: [
@@ -21,9 +30,18 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
     RecipeDetailComponent,
     ShoppingEditComponent,
     RecipeItemComponent,
+    BetterHighlightDirective,
+    DropdownDirective,
   ],
-  imports: [BrowserModule, FormsModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    RouterOutlet,
+    AppRouteModule,
+    RouterLink,
+    RouterLinkActive,
+  ],
+  providers: [AppRouteModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
