@@ -28,6 +28,6 @@ export class RecipeItemComponent implements OnInit, OnDestroy {
   }
 
   selectRecipe(id: number) {
-    this.recipesService.getRecipeById(id);
+    this.recipesService.selectRecipeId(id);
   }
 }

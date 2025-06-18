@@ -1,11 +1,10 @@
 <div class="row">
   <div class="col-xs-12">
-    <p *ngIf="!recipeForm">No form</p>
-    <form (ngSubmit)="onSubmit()" [formGroup]="recipeForm">
+    <form (ngSubmit)="onSubmit()" [formGroup]="newForm">
       <div class="row">
         <div class="col-xs-12">
           <button
-            [disabled]="this.recipeForm.invalid"
+            [disabled]="this.newForm.invalid"
             type="submit"
             class="btn btn-success"
           >
@@ -47,7 +46,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="imagePath.value">
         <div class="col-xs-12">
           <img [src]="imagePath.value" alt="imagePath" class="img-responsive" />
         </div>
@@ -93,13 +92,7 @@
               />
             </div>
             <div class="col-xs-2">
-              <button
-                (click)="onDeleteIngredient(i)"
-                type="button"
-                class="btn btn-danger"
-              >
-                X
-              </button>
+              <button type="button" class="btn btn-danger">X</button>
             </div>
           </div>
         </div>

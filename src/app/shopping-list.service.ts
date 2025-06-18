@@ -13,6 +13,10 @@ export class ShoppingListService {
     new Ingredient('Orange', 14),
   ]);
 
+  private selectedShoppingIndex = new BehaviorSubject<number>(null);
+
+  selectedShoppingIndex$ = this.selectedShoppingIndex.asObservable();
+
   shoppingList$ = this.shoppingLists.asObservable();
 
   addNewShoppingList(newShoppingList: Ingredient) {
@@ -35,5 +39,26 @@ export class ShoppingListService {
     });
 
     this.shoppingLists.next(newShoppingList);
+  }
+
+  updateShoppingList(index: number, newIngredient: Ingredient) {
+    const newShoppingList = [...this.shoppingLists.getValue()];
+    newShoppingList[index] = newIngredient;
+    this.shoppingLists.next(newShoppingList);
+  }
+
+  deleteShoppingList(i: number) {
+    const newShoppingList = [...this.shoppingLists.getValue()];
+    newShoppingList.splice(i, 1);
+    this.shoppingLists.next(newShoppingList);
+    console.log(newShoppingList);
+  }
+
+  selectShoppingListByIndex(index: number) {
+    this.selectedShoppingIndex.next(index);
+  }
+
+  getShoppingListByIndex(index: number): Ingredient {
+    return this.shoppingLists.getValue()[index];
   }
 }

@@ -1,11 +1,31 @@
 <div class="row">
   <div class="col-xs-12">
-    <form>
+    <form (ngSubmit)="addNewIngredient()" [formGroup]="form">
       <div class="row">
         <div class="col-sm-5 form-group">
           <label for="name"
             >Name
-            <input type="text" id="name" class="form-control" #nameInput />
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              formControlName="name"
+            />
+            <div
+              *ngIf="
+                this.form.get('name').touched && this.form.get('name').invalid
+              "
+            >
+              <p *ngIf="this.form.get('name').errors['required']" class="error">
+                Name is required
+              </p>
+              <p
+                *ngIf="this.form.get('name').errors['minlength']"
+                class="error"
+              >
+                Name must contain at least 6 characters
+              </p>
+            </div>
           </label>
         </div>
         <div class="col-sm-5 form-group">
@@ -15,16 +35,44 @@
               type="number"
               id="amount"
               class="form-control"
-              #numberInput
+              formControlName="amount"
             />
+            <div
+              *ngIf="
+                this.form.get('amount').touched &&
+                this.form.get('amount').invalid
+              "
+            >
+              <p
+                *ngIf="this.form.get('amount').errors['required']"
+                class="error"
+              >
+                Amount is required
+              </p>
+            </div>
           </label>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <button (click)="addNewIngredient()" class="btn btn-success" type="submit">Add</button>
-          <button class="btn btn-danger" type="button">Delete</button>
-          <button (click)="removeInput()" class="btn btn-primary" type="button">Clear</button>
+          <button
+            [disabled]="this.form.invalid"
+            class="btn btn-success"
+            type="submit"
+          >
+            {{ editMode === true ? "Update" : "Add" }}
+          </button>
+          <button
+            *ngIf="editMode"
+            (click)="deleteShoppingList()"
+            class="btn btn-danger"
+            type="button"
+          >
+            Delete
+          </button>
+          <button (click)="clearInput()" class="btn btn-primary" type="button">
+            Clear
+          </button>
         </div>
         <div class="clearfix"></div>
       </div>
