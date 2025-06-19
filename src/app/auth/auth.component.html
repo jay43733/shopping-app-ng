@@ -1,5 +1,12 @@
+<ng-template appPlaceholder></ng-template>
 <div class="row">
   <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+
+  <!-- <app-alert
+    *ngIf="errorMessage"
+    [message]="errorMessage"
+    (resetError)="onClearErrorMessage()"
+  ></app-alert> -->
 
   <div class="col-xs-12 col-md-6 col-md-offset-3">
     <form (ngSubmit)="onSubmit(authForm)" #authForm="ngForm" *ngIf="!isLoading">
@@ -59,18 +66,5 @@
         </button>
       </div>
     </form>
-
-    <div *ngIf="errorMessage" class="alert alert-danger">
-      <button
-        type="button"
-        class="close"
-        data-dismiss="alert"
-        aria-hidden="true"
-        (click)="onClearErrorMessage()"
-      >
-        &times;
-      </button>
-      <strong> {{ errorMessage }}</strong>
-    </div>
   </div>
 </div>
